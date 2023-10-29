@@ -3,15 +3,15 @@ import jsonwebtoken from "jsonwebtoken";
 import responseHandler from "../handlers/response.handler.js";
 
 const signup = async (req, res) => {
+  // console.log(req.body,"bharat")
   try {
     const { username, password, displayName } = req.body;
 
     const checkuser = await userModel.findOne({ username });
-
     if (checkuser)
       return responseHandler.badrequest(res, "username already used");
     const user = new userModel();
-
+    
     user.displayName = displayName;
     user.username = username;
     user.setPassword(password);
@@ -22,9 +22,9 @@ const signup = async (req, res) => {
       process.env.TOKEN_SECRET,
       { expiresIn: "24h" }
     );
-
     responseHandler.created(res, { token, ...user._doc, id: user.id });
   } catch (error) {
+    // console.log("errorrrrrr")
     responseHandler.error(res);
   }
 };

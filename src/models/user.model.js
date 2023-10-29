@@ -31,7 +31,7 @@ userSchema.methods.setPassword = function (password) {
 
   this.password = crypto
     .pbkdf2Sync(password, this.salt, 1000, 64, "sha512")
-    .toString("hexI");
+    .toString("hex");
 };
 
 userSchema.methods.validPassword = function (password) {
