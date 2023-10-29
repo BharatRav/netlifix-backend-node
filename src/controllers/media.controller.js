@@ -5,16 +5,15 @@ import favoriteModel from "../models/favorite.model.js";
 import reviewModel from "../models/review.model.js";
 import tokenMiddleware from "../middlewares/token.middleware.js";
 const getList = async (req, res) => {
+  
   try {
     const { page } = req.query;
     const { mediaType, mediaCategory } = req.params;
-
     const response = await tmdbApi.mediaList({
       mediaType,
       mediaCategory,
       page,
     });
-
     return responseHandler.ok(res, response);
   } catch (error) {
     responseHandler.error(res);
@@ -24,10 +23,12 @@ const getList = async (req, res) => {
 const getGenres = async (req, res) => {
   try {
     const { mediaType } = req.params;
-
+    
     const response = await tmdbApi.mediaGenres({ mediaType });
-    return responseHandler.ok(res, response);
+    // console.log(response,"hi")
+    return responseHandler.ok(res, response.data);
   } catch (error) {
+    console.log("errroooooorr",error)
     responseHandler.error(res);
   }
 };
