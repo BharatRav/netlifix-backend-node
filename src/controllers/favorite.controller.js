@@ -46,7 +46,7 @@ const getFavoritesOfUser = async (req, res) => {
     const favorite = await favoriteModel
       .find({ user: req.user.id })
       .sort("-createdAt");
-    responseHandler.ok(res);
+    responseHandler.ok(res,favorite);
   } catch (error) {
     responseHandler.error(res);
   }
