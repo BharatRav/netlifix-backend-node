@@ -86,7 +86,7 @@ router.put(
   userController.updatePassword
 );
 
-router.get("info", tokenMiddleware.auth, userController.getInfo);
+router.get("/info", tokenMiddleware.auth, userController.getInfo);
 
 router.get(
   "/favorites",
