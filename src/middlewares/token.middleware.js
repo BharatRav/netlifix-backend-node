@@ -2,13 +2,13 @@ import jsonwebtoken from "jsonwebtoken";
 import responseHandler from "../handlers/response.handler.js";
 import userModel from "../models/user.model.js";
 
-const tokenDecode = (req) => {
+const tokenDecode = async(req) => {
   try {
     const bearerHeader = req.headers["authorization"];
-
+    
     if (bearerHeader) {
       const token = bearerHeader.split(" ")[1];
-
+      
       return jsonwebtoken.verify(token,process.env.TOKEN_SECRET);
     }
     return false;
@@ -18,11 +18,12 @@ const tokenDecode = (req) => {
 };
 
 const auth = async (req, res, next) => {
-  const tokenDecoded = tokenDecode(req);
-
+  const tokenDecoded = await tokenDecode(req);
+  
   if (!tokenDecoded) return responseHandler.unauthorize(res);
-
+  
   const user = await userModel.findById(tokenDecoded.data);
+  // console.log("ab",user,"bharat")
 
   if (!user) return responseHandler.unauthorize(res);
 
