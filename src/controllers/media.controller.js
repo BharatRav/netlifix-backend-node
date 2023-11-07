@@ -14,7 +14,7 @@ const getList = async (req, res) => {
       page,
     });
     // console.log(response.data,"bharat")
-    return responseHandler.ok(res, response.data);
+    return responseHandler.ok(res, response);
   } catch (error) {
     responseHandler.error(res);
   }
@@ -26,7 +26,7 @@ const getGenres = async (req, res) => {
     
     const response = await tmdbApi.mediaGenres({ mediaType });
     // console.log(response,"hi")
-    return responseHandler.ok(res, response.data);
+    return responseHandler.ok(res, response);
   } catch (error) {
     console.log("errroooooorr",error)
     responseHandler.error(res);
@@ -60,6 +60,8 @@ const getDetails = async (req, res) => {
 
     media.credits = await tmdbApi.mediaCredits(params);
 
+    console.log("bharat",media.credits,"bharat")
+
     const videos = await tmdbApi.mediaVideos(params);
 
     media.videos = videos;
@@ -88,7 +90,7 @@ const getDetails = async (req, res) => {
       .populate("user")
       .sort("-createdAt");
 
-    responseHandler.ok(res, media.data);
+    responseHandler.ok(res, media);
   } catch (error) {
     console.log(error,"bharat")
     responseHandler.error(res);

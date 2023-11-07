@@ -97,12 +97,12 @@ router.get(
 router.post(
   "/favorites",
   tokenMiddleware.auth,
-  body("mediatype")
+  body("mediaType")
     .exists()
     .withMessage("mediatype is required")
     .custom((type) =>
-      ["movie", "tv"].includes(type).withMessage("mediaType invalid")
-    ),
+      ["movie", "tv"].includes(type)).withMessage("mediaType invalid")
+    ,
   body("mediaId")
     .exists()
     .withMessage("mediaId is required")
