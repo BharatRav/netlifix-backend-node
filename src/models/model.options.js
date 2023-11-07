@@ -14,7 +14,7 @@ const modelOptions = {
     },
   },
   versionKey: false,
-  timestaamps: true,
+  timestamps: true,
 };
 
 export default modelOptions;
