@@ -13,7 +13,7 @@ const create = async (req, res) => {
     await review.save();
 
     responseHandler.created(res, {
-      ...review._id,
+      ...review._doc,
       id: review.id,
       user: req.user,
     });
