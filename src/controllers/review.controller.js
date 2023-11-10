@@ -33,7 +33,8 @@ const remove = async (req, res) => {
 
     if (!review) return responseHandler.notfound(res);
 
-    await review.remove();
+    // await review.remove();
+    await review.deleteOne({id:reviewId})
     responseHandler.ok(res);
   } catch (error) {
     responseHandler.error(res);
