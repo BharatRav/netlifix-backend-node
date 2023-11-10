@@ -25,8 +25,8 @@ router.post(
     .exists()
     .withMessage("mediaType is required")
     .custom((type) =>
-      ["movie", "tv"].includes(type).withMessage("mediaType invalid")
-    ),
+      ["movie", "tv"].includes(type)).withMessage("mediaType invalid")
+    ,
   body("mediaTitle").exists().withMessage("mediaTitle is required"),
   body("mediaPoster").exists().withMessage("mediaTPoster is required"),
   requestHandler.validate,
