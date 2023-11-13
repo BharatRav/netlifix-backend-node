@@ -18,7 +18,7 @@ const personMedias = async (req, res) => {
     const { personId } = req.params;
 
     const medias = await tmdbApi.personMedias({ personId });
-    responseHandler.ok(res);
+    responseHandler.ok(res,medias);
   } catch (error) {
     responseHandler.error(res);
   }
